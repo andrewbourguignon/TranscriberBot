@@ -1,50 +1,34 @@
-# IGTranscriber
+# Transcriber Bot 🤖🎬
 
-Simple macOS app to:
+**Universal video transcription for macOS.**
 
-- choose an Instagram video file from anywhere on disk
-- paste an Instagram reel/post link
-- transcribe its audio to text (Apple Speech Recognition)
-- copy transcript to clipboard
-- save transcript to a `.txt` file
+Transcriber Bot is a high-performance tool designed for content creators and researchers to turn video content into high-fidelity text. Formerly known as `IGTranscriber`, it has been expanded to support all major video platforms.
 
-## Run locally
+## ✨ Features
+- **Universal Support**: Transcribe videos from **YouTube, TikTok, Instagram**, and direct video links.
+- **Privacy First**: Uses Apple's native Speech Recognition framework directly on your Mac. No data leaves your machine for transcription.
+- **Auto-Save Engine**: Automatically generates and files transcripts in `~/Downloads/Transcriptions/`.
+- **Intelligent Metadata**: Includes video titles, source URLs, and timestamps in every export.
+- **CLI & GUI**: Use the standalone Mac App or the `transcriber-bot-cli` for automated workflows.
 
+## 🚀 Getting Started
+
+### Prerequisites
+- macOS 14.0 or later.
+- `yt-dlp` installed (via Homebrew: `brew install yt-dlp`).
+
+### Building from Source
 ```bash
-swift run
+# Build the App and CLI
+swift build -c release
+
+# Run the CLI
+./.build/release/transcriber-bot-cli "https://..."
 ```
 
-## Build a DMG
+## 🛠 Usage
+1. **Mac App**: Open `TranscriberBot.app`, paste a link, and hit Transcribe.
+2. **CLI**: Use `transcriber-bot-cli <URL>` for instant transcription and auto-saving to your Downloads folder.
 
-```bash
-chmod +x scripts/build_dmg.sh
-./scripts/build_dmg.sh
-```
-
-Output:
-
-- `dist/IGTranscriber.dmg`
-
-`build_dmg.sh` will bundle `yt-dlp` into the app automatically if `yt-dlp` is installed on your Mac.
-You can also point to a specific binary:
-
-```bash
-YTDLP_PATH=/path/to/yt-dlp ./scripts/build_dmg.sh
-```
-
-For a truly standalone DMG, use the official standalone macOS `yt-dlp` binary (not the Homebrew wrapper script).
-The build script can download it for you:
-
-```bash
-AUTO_DOWNLOAD_YTDLP_STANDALONE=1 ./scripts/build_dmg.sh
-```
-
-## Notes
-
-- First run will ask for Speech Recognition permission.
-- Video files are chosen with a picker; no fixed local storage path is required.
-- Instagram link mode downloads to a temporary folder and removes it after transcription.
-- Instagram link mode uses `yt-dlp` (bundled into the app if available when you build the DMG).
-- Homebrew `yt-dlp` may be a Python wrapper script and is not truly standalone when copied by itself.
-- Private/login-protected Instagram posts may fail unless `yt-dlp` has access (cookies/auth).
-- Transcript quality depends on the audio and macOS Speech Recognition availability for your language.
+---
+Part of the **AI Command Center** ecosystem.
